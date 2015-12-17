@@ -5,8 +5,8 @@ import (
 	"strings"
 	"time"
 
+	"github.com/influxdata/config"
 	"github.com/influxdb/influxdb/models"
-	"github.com/influxdb/influxdb/toml"
 )
 
 const (
@@ -51,18 +51,18 @@ const (
 
 // Config represents the configuration for Graphite endpoints.
 type Config struct {
-	BindAddress      string        `toml:"bind-address"`
-	Database         string        `toml:"database"`
-	Enabled          bool          `toml:"enabled"`
-	Protocol         string        `toml:"protocol"`
-	BatchSize        int           `toml:"batch-size"`
-	BatchPending     int           `toml:"batch-pending"`
-	BatchTimeout     toml.Duration `toml:"batch-timeout"`
-	ConsistencyLevel string        `toml:"consistency-level"`
-	Templates        []string      `toml:"templates"`
-	Tags             []string      `toml:"tags"`
-	Separator        string        `toml:"separator"`
-	UDPReadBuffer    int           `toml:"udp-read-buffer"`
+	BindAddress      string          `toml:"bind-address"`
+	Database         string          `toml:"database"`
+	Enabled          bool            `toml:"enabled"`
+	Protocol         string          `toml:"protocol"`
+	BatchSize        int             `toml:"batch-size"`
+	BatchPending     int             `toml:"batch-pending"`
+	BatchTimeout     config.Duration `toml:"batch-timeout"`
+	ConsistencyLevel string          `toml:"consistency-level"`
+	Templates        []string        `toml:"templates"`
+	Tags             []string        `toml:"tags"`
+	Separator        string          `toml:"separator"`
+	UDPReadBuffer    int             `toml:"udp-read-buffer"`
 }
 
 // WithDefaults takes the given config and returns a new config with any required
@@ -85,7 +85,7 @@ func (c *Config) WithDefaults() *Config {
 		d.BatchPending = DefaultBatchPending
 	}
 	if d.BatchTimeout == 0 {
-		d.BatchTimeout = toml.Duration(DefaultBatchTimeout)
+		d.BatchTimeout = config.Duration(DefaultBatchTimeout)
 	}
 	if d.ConsistencyLevel == "" {
 		d.ConsistencyLevel = DefaultConsistencyLevel

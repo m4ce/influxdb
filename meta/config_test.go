@@ -4,14 +4,14 @@ import (
 	"testing"
 	"time"
 
-	"github.com/BurntSushi/toml"
+	"github.com/influxdata/config"
 	"github.com/influxdb/influxdb/meta"
 )
 
 func TestConfig_Parse(t *testing.T) {
 	// Parse configuration.
 	var c meta.Config
-	if _, err := toml.Decode(`
+	if err := config.Decode(`
 dir = "/tmp/foo"
 election-timeout = "10s"
 heartbeat-timeout = "20s"

@@ -3,7 +3,7 @@ package meta
 import (
 	"time"
 
-	"github.com/influxdb/influxdb/toml"
+	"github.com/influxdata/config"
 )
 
 const (
@@ -34,18 +34,18 @@ const (
 
 // Config represents the meta configuration.
 type Config struct {
-	Dir                  string        `toml:"dir"`
-	Hostname             string        `toml:"hostname"`
-	BindAddress          string        `toml:"bind-address"`
-	Peers                []string      `toml:"-"`
-	RetentionAutoCreate  bool          `toml:"retention-autocreate"`
-	ElectionTimeout      toml.Duration `toml:"election-timeout"`
-	HeartbeatTimeout     toml.Duration `toml:"heartbeat-timeout"`
-	LeaderLeaseTimeout   toml.Duration `toml:"leader-lease-timeout"`
-	CommitTimeout        toml.Duration `toml:"commit-timeout"`
-	ClusterTracing       bool          `toml:"cluster-tracing"`
-	RaftPromotionEnabled bool          `toml:"raft-promotion-enabled"`
-	LoggingEnabled       bool          `toml:"logging-enabled"`
+	Dir                  string          `toml:"dir"`
+	Hostname             string          `toml:"hostname"`
+	BindAddress          string          `toml:"bind-address"`
+	Peers                []string        `toml:"-"`
+	RetentionAutoCreate  bool            `toml:"retention-autocreate"`
+	ElectionTimeout      config.Duration `toml:"election-timeout"`
+	HeartbeatTimeout     config.Duration `toml:"heartbeat-timeout"`
+	LeaderLeaseTimeout   config.Duration `toml:"leader-lease-timeout"`
+	CommitTimeout        config.Duration `toml:"commit-timeout"`
+	ClusterTracing       bool            `toml:"cluster-tracing"`
+	RaftPromotionEnabled bool            `toml:"raft-promotion-enabled"`
+	LoggingEnabled       bool            `toml:"logging-enabled"`
 }
 
 // NewConfig builds a new configuration with default values.
@@ -54,10 +54,10 @@ func NewConfig() *Config {
 		Hostname:             DefaultHostname,
 		BindAddress:          DefaultBindAddress,
 		RetentionAutoCreate:  true,
-		ElectionTimeout:      toml.Duration(DefaultElectionTimeout),
-		HeartbeatTimeout:     toml.Duration(DefaultHeartbeatTimeout),
-		LeaderLeaseTimeout:   toml.Duration(DefaultLeaderLeaseTimeout),
-		CommitTimeout:        toml.Duration(DefaultCommitTimeout),
+		ElectionTimeout:      config.Duration(DefaultElectionTimeout),
+		HeartbeatTimeout:     config.Duration(DefaultHeartbeatTimeout),
+		LeaderLeaseTimeout:   config.Duration(DefaultLeaderLeaseTimeout),
+		CommitTimeout:        config.Duration(DefaultCommitTimeout),
 		RaftPromotionEnabled: DefaultRaftPromotionEnabled,
 		LoggingEnabled:       DefaultLoggingEnabled,
 	}

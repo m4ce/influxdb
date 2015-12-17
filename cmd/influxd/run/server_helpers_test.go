@@ -18,11 +18,11 @@ import (
 	"testing"
 	"time"
 
+	toml "github.com/influxdata/config"
 	"github.com/influxdb/influxdb/client/v2"
 	"github.com/influxdb/influxdb/cmd/influxd/run"
 	"github.com/influxdb/influxdb/meta"
 	"github.com/influxdb/influxdb/services/httpd"
-	"github.com/influxdb/influxdb/toml"
 )
 
 const emptyResults = `{"results":[{}]}`

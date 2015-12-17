@@ -3,7 +3,7 @@ package udp
 import (
 	"time"
 
-	"github.com/influxdb/influxdb/toml"
+	"github.com/influxdata/config"
 )
 
 const (
@@ -56,13 +56,13 @@ type Config struct {
 	Enabled     bool   `toml:"enabled"`
 	BindAddress string `toml:"bind-address"`
 
-	Database        string        `toml:"database"`
-	RetentionPolicy string        `toml:"retention-policy"`
-	BatchSize       int           `toml:"batch-size"`
-	BatchPending    int           `toml:"batch-pending"`
-	ReadBuffer      int           `toml:"read-buffer"`
-	BatchTimeout    toml.Duration `toml:"batch-timeout"`
-	UDPPayloadSize  int           `toml:"udp-payload-size"`
+	Database        string          `toml:"database"`
+	RetentionPolicy string          `toml:"retention-policy"`
+	BatchSize       int             `toml:"batch-size"`
+	BatchPending    int             `toml:"batch-pending"`
+	ReadBuffer      int             `toml:"read-buffer"`
+	BatchTimeout    config.Duration `toml:"batch-timeout"`
+	UDPPayloadSize  int             `toml:"udp-payload-size"`
 }
 
 // WithDefaults takes the given config and returns a new config with any required
@@ -79,7 +79,7 @@ func (c *Config) WithDefaults() *Config {
 		d.BatchPending = DefaultBatchPending
 	}
 	if d.BatchTimeout == 0 {
-		d.BatchTimeout = toml.Duration(DefaultBatchTimeout)
+		d.BatchTimeout = config.Duration(DefaultBatchTimeout)
 	}
 	if d.ReadBuffer == 0 {
 		d.ReadBuffer = DefaultReadBuffer

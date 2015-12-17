@@ -9,10 +9,10 @@ import (
 	"testing"
 	"time"
 
+	"github.com/influxdata/config"
 	"github.com/influxdb/influxdb/cluster"
 	"github.com/influxdb/influxdb/meta"
 	"github.com/influxdb/influxdb/models"
-	"github.com/influxdb/influxdb/toml"
 )
 
 // Test that the service checks / creates the target database on startup.
@@ -190,7 +190,7 @@ func newTestService(batchSize int, batchDuration time.Duration) *testService {
 			BindAddress:   "127.0.0.1:0",
 			Database:      "collectd_test",
 			BatchSize:     batchSize,
-			BatchDuration: toml.Duration(batchDuration),
+			BatchDuration: config.Duration(batchDuration),
 		}),
 	}
 	s.Service.PointsWriter = &s.PointsWriter

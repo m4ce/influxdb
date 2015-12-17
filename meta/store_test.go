@@ -15,10 +15,10 @@ import (
 	"testing"
 	"time"
 
+	"github.com/influxdata/config"
 	"github.com/influxdb/influxdb"
 	"github.com/influxdb/influxdb/meta"
 	"github.com/influxdb/influxdb/tcp"
-	"github.com/influxdb/influxdb/toml"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -1228,10 +1228,10 @@ func NewConfig(path string) *meta.Config {
 		Dir:                  path,
 		Hostname:             "localhost",
 		BindAddress:          "127.0.0.1:0",
-		HeartbeatTimeout:     toml.Duration(500 * time.Millisecond),
-		ElectionTimeout:      toml.Duration(500 * time.Millisecond),
-		LeaderLeaseTimeout:   toml.Duration(500 * time.Millisecond),
-		CommitTimeout:        toml.Duration(5 * time.Millisecond),
+		HeartbeatTimeout:     config.Duration(500 * time.Millisecond),
+		ElectionTimeout:      config.Duration(500 * time.Millisecond),
+		LeaderLeaseTimeout:   config.Duration(500 * time.Millisecond),
+		CommitTimeout:        config.Duration(5 * time.Millisecond),
 		RaftPromotionEnabled: true,
 	}
 }
